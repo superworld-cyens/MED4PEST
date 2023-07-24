@@ -12,6 +12,12 @@ The high-level objectives of the project are the following:
 * Novel plant-based bio-rodenticide (BR) development and testing in lab and field. The BR will fill the void where synthetic rodenticides are no longer effective, while alternatives are not yet developed. A BR is a game-changer in the field of rodenticides and presents a necessary addition to the Integrated Pest Management package for smallscale farmers.
  <a href="https://med4pest.org/" target="_blank">MED4PEST</a>
 
+## Description
+Collects temperature, humidity, sound, low frame rate video, and weight.
+
+### System required
+* Raspberry pi 4 or Raspberry pi Zero 2W
+* Raspbian OS
 
 Getting Started
 Dependencies
