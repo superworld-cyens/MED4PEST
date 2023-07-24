@@ -48,6 +48,6 @@ Acknowledgements
 
 We would like to thank the following contributors for their help with this project:
 
-  * chirag Padubidri
   * Shrasti Dadhich
+  * Chirag Padubidri
   * Andreas Kamilaris
