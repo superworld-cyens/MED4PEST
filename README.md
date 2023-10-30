@@ -11,8 +11,13 @@ MED4PEST aims to develop proven, effective Ecologically Based Rodent Management 
 Collects temperature, humidity, sound, low frame rate video, and weight.
 
 ### Hardware
-* Raspberry pi 4
-* 
+* Raspberry Pi 4
+* Raspberry Pi Night Vision Camera
+* M500-384 USB Ultrasound Microphone (Pettersson)
+* Ultrasonic Distance Sensor - HC-SR04 (5V)
+* SHT30 Temperature and Humidity Sensor (Waterproof)
+* RadarIQ-M1 VISION Sensor (Additional)
+
 
 Getting Started
 Dependencies
@@ -37,13 +42,13 @@ Usage
 Methodology
 
 
-Results
+[comment]: <> (Results
 
 Here are some example images captured by the camera and processed by our algorithm:
 
 Example 1
 Example 2
-Example 3
+Example 3)
 
 Acknowledgements
 
