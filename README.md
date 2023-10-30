@@ -1,4 +1,4 @@
-# SPY-miCE [SPYCE] – An IoT smart sensor-trap station to monitor rodent 
+# SPYCE [SPY-miCE] – An IoT smart sensor-trap station to monitor rodent 
 ![pexels-monique-laats-736524](https://github.com/superworld-cyens/MED4PEST/assets/37176779/b5764d20-93d1-4968-a0bd-91e48951ee55)
 
 
@@ -39,10 +39,10 @@ Usage
 
     
 
-Methodology
+[comment]: <> (Methodology
 
 
-[comment]: <> (Results
+Results
 
 Here are some example images captured by the camera and processed by our algorithm:
 
