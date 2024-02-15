@@ -63,7 +63,7 @@ echo "Downloaded Opencv 4.5.2 and unzipped to folder opencv and opencv_contrib o
 echo "###################################################################################################"
 
 
-pip3 install numpy
+sudo pip3 install numpy
 
 echo "###################################################################################################"
 echo "All pre-setup completed. OpenCV ready to build"
