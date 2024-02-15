@@ -103,6 +103,7 @@ FAQ:
         * Expand the file system 
             
             sudo raspi-config
+            
             Advance Option> Exapand Filesystem
 
     
