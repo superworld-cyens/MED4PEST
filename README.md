@@ -100,12 +100,19 @@ FAQ:
     * Error: Opencv cannot be installed using Pip.
     * Reason: Compatible issue.
     * Solution: Install opencv from source file. The steps are given below.
-        * Expand the file system 
+        * Expand the file system.
             
             sudo raspi-config
-            
-            Advance Option> Exapand Filesystem
 
+            Advance Option> Exapand Filesystem
+        * Make the installation scripts executable.
+
+            sudo chmod +x spyce-setup/set_SWAPSIZE.sh
+            sudo chmod +x spyce-setup/install_opencv.sh
+        
+        * Run installation script.
+
+            ./spyce-setup/install_opencv.sh
     
 
 
