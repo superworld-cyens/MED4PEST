@@ -96,7 +96,7 @@ Frequently Asked Questions:
     * Solution: Make it executable.
         
         ``` chmod +x .venv/bin/activate
-
+        ```
 
 3. Opencv not installed. 
     * Error: Opencv cannot be installed using Pip.
