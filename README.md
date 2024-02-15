@@ -82,12 +82,12 @@ FAQ:
     Reason: Installation conflict between apt and pip packages.
         
     Solution: Install the packages inside a python virtual environment.
-    
-        1. sudo python3 -m venv path/to/virtual/env
-            Example : python3 -m venv .venv (.venv can be any name)
 
-        2. source path/to/virtual/env
-            source .venv/bin/activate
+        * sudo python3 -m venv path/to/virtual/env
+            Example : python3 -m venv .venv 
+
+        * source path/to/virtual/env
+            Example : source .venv/bin/activate
 
 
 * Issue 2
