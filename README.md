@@ -29,10 +29,10 @@ Dependencies
     PiCamera
     Pyaudio
     
+Clone Repository
+    git clone https://github.com/your_username/MED4PEST.git
 
-Installing
-
-    Clone the repository: git clone https://github.com/your_username/MED4PEST.git
+Install Dependencies
     cd Sensors
     Install dependencies: pip install -r requirements.txt
 
