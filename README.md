@@ -114,7 +114,7 @@ Frequently Asked Questions:
         
         * Run installation script.
 
-            ``` ./spyce-setup/install_opencv.sh ``
+            ``` ./spyce-setup/install_opencv.sh ```
     
 
 
