@@ -55,9 +55,9 @@ If you encounter any problems with the installation of dependencies, please refe
 
 
 
-FAQ:
+Frequently Asked Questions:
 
-1. Pip Installation Error
+1. Pip Installation Error.
     * Error: externally-managed-environment
         × This environment is externally managed
         ╰─> To install Python packages system-wide, try apt install
@@ -81,19 +81,19 @@ FAQ:
     * Reason: Installation conflict between apt and pip packages.
         
     * Solution: Install the packages inside a python virtual environment.
-        * sudo python3 -m venv path/to/virtual/env
-
-            Example : python3 -m venv .venv 
-
+        * sudo python3 -m venv path/to/virtual/env 
         * source path/to/virtual/env
+        Example : 
+            
+            source .venv/bin/activate
+            python3 -m venv .venv
 
-            Example : source .venv/bin/activate
-
-
-2. When activating virtual environment 
-    * Error: 'bash:/path/bin/activate: permission denied'
+2. When activating virtual environment.
+    * Error: 'bash:/path/bin/activate: permission denied'.
     * Reason: 'activate' script is not executable.
-    * Solution: Make it chmod +x .venv/bin/activate
+    * Solution: Make it executable.
+        
+        chmod +x .venv/bin/activate.
 
 
 3. Opencv not installed. 
@@ -105,6 +105,7 @@ FAQ:
             sudo raspi-config
 
             Advance Option> Exapand Filesystem
+
         * Make the installation scripts executable.
 
             sudo chmod +x spyce-setup/set_SWAPSIZE.sh
