@@ -8,7 +8,7 @@ echo "##########################################################################
 echo "Updated and Upgraded. Expanding SWAPSIZE to 2048 MB"
 echo "###################################################################################################"
 
-./set_SWAPSIZE.sh 2048
+spyce-setup/set_SWAPSIZE.sh 2048
 
 echo "###################################################################################################"
 echo "SWAPSIZE expanded to 2048 MB. Preparing to install dependecies"
