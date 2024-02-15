@@ -86,15 +86,15 @@ Frequently Asked Questions:
 
         Example : 
             
-            ``` source .venv/bin/activate
-            
-            ``` python3 -m venv .venv
+        ``` source .venv/bin/activate ```
+        
+        ``` python3 -m venv .venv ```
 
 2. When activating virtual environment.
     * Error: 'bash:/path/bin/activate: permission denied'.
     * Reason: 'activate' script is not executable.
     * Solution: Make it executable.    
-        ``` chmod +x .venv/bin/activate
+        ``` chmod +x .venv/bin/activate ```
     
 
 3. Opencv not installed. 
@@ -103,14 +103,14 @@ Frequently Asked Questions:
     * Solution: Install opencv from source file. The steps are given below.
         * Expand the file system.
             
-            ``` sudo raspi-config
+            ``` sudo raspi-config ```
 
             Advance Option> Exapand Filesystem
 
         * Make the installation scripts executable.
 
-            ``` sudo chmod +x spyce-setup/set_SWAPSIZE.sh
-            ``` sudo chmod +x spyce-setup/install_opencv.sh
+            ``` sudo chmod +x spyce-setup/set_SWAPSIZE.sh ```
+            ``` sudo chmod +x spyce-setup/install_opencv.sh ```
         
         * Run installation script.
 
