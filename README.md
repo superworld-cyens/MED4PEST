@@ -95,7 +95,7 @@ Frequently Asked Questions:
     * Reason: 'activate' script is not executable.
     * Solution: Make it executable.
         
-        ``` chmod +x .venv/bin/activate.
+        `chmod +x .venv/bin/activate.
 
 
 3. Opencv not installed. 
