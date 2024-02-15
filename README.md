@@ -86,11 +86,15 @@ FAQ:
             Example : python3 -m venv .venv 
 
         * source path/to/virtual/env
-        
+
             Example : source .venv/bin/activate
 
 
-2. Issue 2
+2. When activating virtual environment 
+    * Error: 'bash:/path/bin/activate: permission denied'
+    * Reason: 'activate' script is not executable.
+    * Solution: Make it chmod +x .venv/bin/activate
+
 
 
     
