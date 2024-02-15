@@ -21,11 +21,11 @@ Collects temperature, humidity, sound, low frame rate video, and weight.
 
 Getting Started
     
-Clone Repository
+Clone Repository:
 
-    git clone https://github.com/your_username/MED4PEST.git
+    git clone https://github.com/superworld-cyens/MED4PEST.git
 
-Dependencies
+Dependencies:
 
     Python 3.7+
     OpenCV
@@ -35,19 +35,62 @@ Dependencies
     Pyaudio
     
 
-Install Dependencies 
+Install Dependencies:
 
-    cd Sensors
-    pip install -r requirements.txt
-
-Test Dependencies
+    pip install -r spyce-setup/requirements.txt
 
 
-After installing packages in requirements.txt, verify if all package are installed correctly.
-Some issue:
-Find the FAQs below
+Verifying Test Dependencies Installation:
 
-Usage
+After you have installed the packages listed in requirements.txt, it's important to ensure they are correctly installed. You can verify this by executing the following command:
+
+    python spyce-setup/check_dependencies.py
+
+This script checks each package and reports any issues with the installation process.
+
+Troubleshooting Installation Issues:
+
+If you encounter any problems with the installation of dependencies, please refer to the FAQ section at the end of this document for troubleshooting advice and common solutions.
+
+
+
+
+FAQ:
+
+* Pip Installation Error
+    Error: externally-managed-environment
+
+    × This environment is externally managed
+    ╰─> To install Python packages system-wide, try apt install
+        python3-xyz, where xyz is the package you are trying to
+        install.
+
+        If you wish to install a non-Debian-packaged Python package,
+        create a virtual environment using python3 -m venv path/to/venv.
+        Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+        sure you have python3-full installed.
+
+        If you wish to install a non-Debian packaged Python application,
+        it may be easiest to use pipx install xyz, which will manage a
+        virtual environment for you. Make sure you have pipx installed.
+
+        See /usr/share/doc/python3.11/README.venv for more information.
+
+        note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+        hint: See PEP 668 for the detailed specification.
+    
+    Reason: Installation conflict between apt and pip packages.
+        
+    Solution: Install the packages inside a python virtual environment.
+        1. sudo python3 -m venv path/to/virtual/env
+            Example : python3 -m venv .venv (.venv can be any name)
+
+        2. source path/to/virtual/env
+            source .venv/bin/activate
+
+
+* Issue 2
+
 
     
 
