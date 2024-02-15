@@ -82,8 +82,7 @@ FAQ:
     Reason: Installation conflict between apt and pip packages.
         
     Solution: Install the packages inside a python virtual environment.
-
-        * sudo python3 -m venv path/to/virtual/env
+    * sudo python3 -m venv path/to/virtual/env
             Example : python3 -m venv .venv 
 
         * source path/to/virtual/env
