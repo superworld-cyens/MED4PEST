@@ -20,6 +20,11 @@ Collects temperature, humidity, sound, low frame rate video, and weight.
 
 
 Getting Started
+    
+Clone Repository
+
+    git clone https://github.com/your_username/MED4PEST.git
+
 Dependencies
 
     Python 3.7+
@@ -29,14 +34,16 @@ Dependencies
     PiCamera
     Pyaudio
     
-Clone Repository
-    git clone https://github.com/your_username/MED4PEST.git
 
-Install Dependencies
+Install Dependencies 
+
     cd Sensors
-    Install dependencies: pip install -r requirements.txt
+    pip install -r requirements.txt
 
-After installing packages in requirements.tx, verify if all package are installed correctly.
+Test Dependencies
+
+
+After installing packages in requirements.txt, verify if all package are installed correctly.
 Some issue:
 Find the FAQs below
 
