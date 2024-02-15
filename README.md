@@ -36,10 +36,9 @@ Installing
     cd Sensors
     Install dependencies: pip install -r requirements.txt
 
-    After installing packages in requirements.tx, verify if all package are installed coorectly.
-
-    Some issue:
-     Find the FAQs below
+After installing packages in requirements.tx, verify if all package are installed correctly.
+Some issue:
+Find the FAQs below
 
 Usage
 
