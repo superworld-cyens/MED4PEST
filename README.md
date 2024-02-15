@@ -33,22 +33,18 @@ Dependencies
 Installing
 
     Clone the repository: git clone https://github.com/your_username/MED4PEST.git
+    cd Sensors
     Install dependencies: pip install -r requirements.txt
+
+    After installing packages in requirements.tx, verify if all package are installed coorectly.
+
+    Some issue:
+     Find the FAQs below
 
 Usage
 
     
 
-[comment]: <> (Methodology
-
-
-Results
-
-Here are some example images captured by the camera and processed by our algorithm:
-
-Example 1
-Example 2
-Example 3)
 
 Acknowledgements
 
