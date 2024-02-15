@@ -36,6 +36,8 @@ sudo apt install -y python3-dev
 
 sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module
 
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+
 echo "###################################################################################################"
 echo "All dependencies installed. Preparing to download opencv."
 echo "###################################################################################################"
