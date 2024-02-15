@@ -85,16 +85,20 @@ Frequently Asked Questions:
         * source path/to/virtual/env
 
         Example : 
+
+        ``` python3 -m venv .venv ```
             
         ``` source .venv/bin/activate ```
         
-        ``` python3 -m venv .venv ```
 
 2. When activating virtual environment.
     * Error: 'bash:/path/bin/activate: permission denied'.
     * Reason: 'activate' script is not executable.
     * Solution: Make it executable.    
+        
         ``` chmod +x .venv/bin/activate ```
+
+        ``` sudo chown -R rmd1:rmd1 /home/rmd1/MED4PEST/rmdvenv ```
     
 
 3. Opencv not installed. 
