@@ -83,17 +83,19 @@ Frequently Asked Questions:
     * Solution: Install the packages inside a python virtual environment.
         * sudo python3 -m venv path/to/virtual/env 
         * source path/to/virtual/env
+
         Example : 
             
-            source .venv/bin/activate
-            python3 -m venv .venv
+            ``` source .venv/bin/activate
+            
+            ``` python3 -m venv .venv
 
 2. When activating virtual environment.
     * Error: 'bash:/path/bin/activate: permission denied'.
     * Reason: 'activate' script is not executable.
     * Solution: Make it executable.
         
-        chmod +x .venv/bin/activate.
+        ``` chmod +x .venv/bin/activate.
 
 
 3. Opencv not installed. 
