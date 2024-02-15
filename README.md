@@ -96,6 +96,14 @@ FAQ:
     * Solution: Make it chmod +x .venv/bin/activate
 
 
+3. Opencv not installed. 
+    * Error: Opencv cannot be installed using Pip.
+    * Reason: Compatible issue.
+    * Solution: Install opencv from source file. The steps are given below.
+        * Expand the file system 
+            
+            sudo raspi-config
+            Advance Option> Exapand Filesystem
 
     
 
