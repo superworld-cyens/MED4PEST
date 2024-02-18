@@ -53,8 +53,6 @@ List of Dependencies:
 - Python 3.7+
 - OpenCV
 - NumPy
-- Matplotlib
-- PiCamera
 - PyAudio
 
 To install the dependencies, follow the steps below:
@@ -66,6 +64,7 @@ To install the dependencies, follow the steps below:
 2. Update and upgrade the Raspberry Pi:
 
         sudo apt-get update
+
         sudo apt-get upgrade
 
 3. Install the virtual environment, create a Python virtual environment, and activate it:
