@@ -85,7 +85,7 @@ To install the dependencies, follow the steps below:
 
         pip install -r spyce-setup/requirements.txt
 
-6. You can run the below `setup_spyce.sh` script to automate the aforementioned steps:
+6. ### You can run the below `setup_spyce.sh` script to automate the aforementioned steps:
 
         chmod +x spyce-setup/setup.sh  # Make the file executable
         ./spyce-setup/setup.sh  # Execute the script
