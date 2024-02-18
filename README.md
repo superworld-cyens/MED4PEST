@@ -1,14 +1,13 @@
-# SPYCE [SPY-miCE] – An IoT smart sensor-trap station to monitor rodent 
+# SPYCE [SPY-miCE] – An IoT Smart Sensor-Trap Station for Rodent Monitoring
 ![pexels-monique-laats-736524](https://github.com/superworld-cyens/MED4PEST/assets/37176779/b5764d20-93d1-4968-a0bd-91e48951ee55)
-
 
 ## Introduction
 
-### MED4PEST Project: Ecologically-based rodent management
-MED4PEST aims to develop proven, effective Ecologically Based Rodent Management (EBRM) methods and products, which are readily integrated into local pest /invasive rodent management systems in Mediterranean countries, contributing to the shift from synthetic pest control to biological and ecological pest management, ultimately leading to eco-sustainable farming systems, higher quality and quantity crop production and optimization of input use for ecosystem health. MED4PEST objectives and goals will produce new knowledge through scientific research that will be pursued with the collaborative research of the consortium partners from 2 Universities, 2 Research Institutes, and one company. <a href="https://med4pest.org/" target="_blank">MED4PEST</a>
+### MED4PEST Project: Ecologically-Based Rodent Management
+MED4PEST aims to develop proven and effective Ecologically Based Rodent Management (EBRM) methods and products that can be readily integrated into local pest/invasive rodent management systems in Mediterranean countries. This initiative contributes to the shift from synthetic pest control to biological and ecological pest management, ultimately fostering eco-sustainable farming systems, enhancing crop production quality and quantity, and optimizing ecosystem health inputs. The MED4PEST objectives and goals will generate new knowledge through scientific research conducted in collaboration with consortium partners from two universities, two research institutes, and one company. [MED4PEST](https://med4pest.org/)
 
 ## SPYCE - Rodent Monitoring Device
-Collects temperature, humidity, sound, low frame rate video, and weight.
+The device collects data on temperature, humidity, sound, low frame rate video, and weight.
 
 ### Hardware
 * Raspberry Pi 4
@@ -18,114 +17,111 @@ Collects temperature, humidity, sound, low frame rate video, and weight.
 * SHT30 Temperature and Humidity Sensor (Waterproof)
 * RadarIQ-M1 VISION Sensor (Additional)
 
+### Getting Started
 
-Getting Started
+#### Install Raspberry Pi OS
+Step 1: Download the Raspberry Pi Imager.
+
+Step 2: Prepare the microSD Card.
+1. Insert the microSD card into your computer’s card slot or into a USB card reader.
+2. Open the Raspberry Pi Imager.
+3. Click on "CHOOSE OS" and select the version of Raspberry Pi OS you prefer (e.g., Raspberry Pi OS Full, Raspberry Pi OS Lite for a headless setup, etc.).
+4. Click on "CHOOSE SD CARD" and select your microSD card from the list.
+5. Click on "WRITE" and wait for the process to complete. This will erase everything on the microSD card.
+
+    Note: For standard practice, follow the instructions below:
+    * In the Hostname field, type 'spyce'.
+    * For the Username, enter your favorite spice (e.g., pepper, cumin, oregano, etc.).
+    * Enter a password.
+    * Enter the WiFi SSID and password (required for connecting to the Raspberry Pi in headless mode, i.e., via terminal).
+
+#### Connect to Raspberry Pi
+1. **With a Monitor**: This is the simplest method and is recommended for beginners. Connect a monitor, keyboard, and mouse to work with the Raspberry Pi as a desktop setup.
+2. **Using a Capture Card**.
+3. **Via SSH**: This is the most efficient way to work with the Raspberry Pi. You can access the device without connecting any extra peripherals.
+
+    Syntax:
+
+        ssh username@hostname.local
+        ssh pepper@spyce.local # Example
     
-Clone Repository:
+    Note: SSH connection requires both machines to be on the same network. For remote access, consider using [remote.it](https://www.remote.it/getting-started/raspberry-pi).
 
-    git clone https://github.com/superworld-cyens/MED4PEST.git
+#### Install Dependencies
 
-Dependencies:
+List of Dependencies:
+- Python 3.7+
+- OpenCV
+- NumPy
+- Matplotlib
+- PiCamera
+- PyAudio
 
-    Python 3.7+
-    OpenCV
-    NumPy
-    Matplotlib
-    PiCamera
-    Pyaudio
-    
+To install the dependencies, follow the steps below:
 
-Install Dependencies:
+1. Clone the repository:
 
-    pip install -r spyce-setup/requirements.txt
+        git clone https://github.com/superworld-cyens/MED4PEST.git
 
+2. Update and upgrade the Raspberry Pi:
 
-Verifying Test Dependencies Installation:
+        sudo apt-get update
+        sudo apt-get upgrade
 
-After you have installed the packages listed in requirements.txt, it's important to ensure they are correctly installed. You can verify this by executing the following command:
+3. Install the virtual environment, create a Python virtual environment, and activate it:
 
-    python spyce-setup/check_dependencies.py
+        sudo apt install python3-venv   # Install Python virtual environment package
+        python -m venv .spy  # Create a virtual environment with any name
+        source .spy/bin/activate  # Activate the virtual environment
 
-This script checks each package and reports any issues with the installation process.
+4. Install dependency packages:
 
-Troubleshooting Installation Issues:
+        sudo apt-get install build-essential cmake git pkg-config libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libfontconfig1-dev libcairo2-dev
+        sudo apt-get install libgtk2.0-dev pkg-config
 
-If you encounter any problems with the installation of dependencies, please refer to the FAQ section at the end of this document for troubleshooting advice and common solutions.
+    Note: Ensure that the above dependency packages are installed correctly without any errors.
 
+5. Install requirements:
 
+        pip install -r spyce-setup/requirements.txt
 
+6. You can run the below `setup_spyce.sh` script to automate the aforementioned steps:
 
-Frequently Asked Questions:
+        chmod +x spyce-setup/setup.sh  # Make the file executable
+        ./spyce-setup/setup.sh  # Execute the script
 
-1. Pip Installation Error.
-    * Error: externally-managed-environment
-        × This environment is externally managed
-        ╰─> To install Python packages system-wide, try apt install
-            python3-xyz, where xyz is the package you are trying to
-            install.
+7. Verifying Test Dependencies Installation:
 
-            If you wish to install a non-Debian-packaged Python package,
-            create a virtual environment using python3 -m venv path/to/venv.
-            Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
-            sure you have python3-full installed.
+    After installing the packages listed in `requirements.txt`, verify the installation by executing the following script:
 
-            If you wish to install a non-Debian packaged Python application,
-            it may be easiest to use pipx install xyz, which will manage a
-            virtual environment for you. Make sure you have pipx installed.
+        python spyce-setup/check_dependencies.py
 
-            See /usr/share/doc/python3.11/README.venv for more information.
+    This script checks each package and reports any issues with the installation process.
 
-            note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
-            hint: See PEP 668 for the detailed specification.
-    
-    * Reason: Installation conflict between apt and pip packages.
-        
-    * Solution: Install the packages inside a python virtual environment.
-        * sudo python3 -m venv path/to/virtual/env 
-        * source path/to/virtual/env
+8. Troubleshooting Installation Issues:
 
-        Example : 
+    For troubleshooting advice and common solutions to installation issues, please refer to the FAQ section at the end of this document.
 
-        ``` python3 -m venv .venv ```
-            
-        ``` source .venv/bin/activate ```
-        
+## Frequently Asked Questions
 
-2. When activating virtual environment.
-    * Error: 'bash:/path/bin/activate: permission denied'.
-    * Reason: 'activate' script is not executable.
-    * Solution: Make it executable.    
-        
-        ``` chmod +x .venv/bin/activate ```
+1. **Pip Installation Error**:
+    - Error: `externally-managed-environment`
+    - Reason: Installation conflict between `apt` and `pip` packages.
+    - Solution: Install the packages inside a Python virtual environment.
 
-        ``` sudo chown -R rmd1:rmd1 /home/rmd1/MED4PEST/rmdvenv ```
-    
+2. **When activating the virtual environment**:
+    - Error: `'bash:/path/bin/activate: permission denied'`.
+    - Reason: The 'activate' script is not executable.
+    - Solution: Make it executable.
 
-3. Opencv not installed. 
-    * Error: Opencv cannot be installed using Pip.
-    * Reason: Compatible issue.
-    * Solution: Install opencv from source file. The steps are given below.
-        * Expand the file system.
-            
-            ``` sudo raspi-config ```
+3. **OpenCV not installed**:
+    - Error: OpenCV cannot be installed using Pip due to compatibility issues.
+    - Solution: Install OpenCV from the source file.
 
-            Advance Option> Exapand Filesystem
-
-        * Make the installation scripts executable.
-
-            ``` sudo chmod +x spyce-setup/set_SWAPSIZE.sh ```
-            ``` sudo chmod +x spyce-setup/install_opencv.sh ```
-        
-        * Run installation script.
-
-            ``` ./spyce-setup/install_opencv.sh ```
-    
-
-
-Acknowledgements
+## Acknowledgements
 
 We would like to thank the following contributors for their help with this project:
 
-  * Chirag Padubidri
-  * Shrasti Dadhich
-  * Andreas Kamilaris
+- Chirag Padubidri
+- Shrasti Dadhich
+- Andreas Kamilaris

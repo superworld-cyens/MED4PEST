@@ -8,7 +8,7 @@ else:
     print(f"Python version is {sys.version_info[0]}.{sys.version_info[1]}, requirement satisfied.")
 
 # List of packages to check
-packages = ["cv2", "numpy", "matplotlib", "picamera", "pyaudio"]
+packages = ["cv2", "numpy"]
 
 # Check each package
 for package in packages:
