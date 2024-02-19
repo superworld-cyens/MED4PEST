@@ -1,0 +1,15 @@
+{
+    "paths": {
+      "output": "/home/pepper/data-store"
+    },
+    "camera":{
+        "fps":5,
+        "imageWidth":512, 
+        "imageHeight":512
+    },
+
+    "settings":{
+        "debug": true
+    }
+
+  }
