@@ -1,5 +1,7 @@
 from cv2 import VideoCapture, imshow, destroyAllWindows, imwrite, imshow, waitKey
 import time
+from datetime import datetime
+
 import os
 
 from logHandler import log
@@ -16,7 +18,7 @@ class Camera:
             raise Exception('Camera did not initialise, restart.')
         self.cam.set(3, width)
         self.cam.set(4, height)
-        self.folderapth = savepath # still needs to add the name, now it has only the directory to be saved
+        self.folderpath = savepath # still needs to add the name, now it has only the directory to be saved
 
         if not(os.path.exists(logpath)):
             os.mkdir(logpath)
@@ -24,26 +26,29 @@ class Camera:
         self.log = log('./log')
 
         
-    def capture_images(self):
+    def capture_images(self, record_time=5):
         try:
             missframecount = 0
+            startTime = time.time()
             while True:
-                startTime = time.time()
                 ret, frame = self.cam.read()
 
                 timeFPS = 1 / self.framerate # convertin framerate into waiting time in seconds between frames
 
-                if (ret): #check if frames are captured successfully.
-                    print(frame.shape)
-                    # #recording time and preparing the folder
-                    # timestr = time.strftime("%Y_%m_%d-%H%M%S")
-                    # dateForFileName = time.strftime("%Y_%m_%d")
+                if ret: #check if frames are captured successfully.
+                    #recording time and preparing the folder
+                    timestr = datetime.now()
+                    m_sec = round(timestr.microsecond / 1e6, 4)
+                    dateForFileName = timestr.strftime("%Y_%m_%d")
+                    timeForFileName = timestr.strftime("%H_%M_%S")
 
-                    # os.mkdir(f'{self.imageName}/{dateForFileName}/')
+                    folderpath = f'{self.folderpath }/{dateForFileName}/{timeForFileName}/image'
+                    if not(os.path.exists(folderpath)):
+                        os.makedirs(folderpath)
 
-                    # fileName = f'{self.imageName}/{dateForFileName}/{timestr} {i}.jpg'
-
-                    # time.sleep(timeFPS)
+                    fileName = os.path.join(folderpath, timestr.strftime(f"%H%M%S-{str(m_sec)[2:]}")+'.png')
+                    imwrite(fileName,frame)
+                    time.sleep(timeFPS)
                 
                 else:
                     e = "Cannot read frame."
@@ -53,59 +58,16 @@ class Camera:
                     else:
                         e = f"Quiting after trying {self.framerate} frames."
                         self.log.printDebug(e, self.debug)
+                        self.close_cameras()
                         break
                 
-
-        # 
-        # time_A = 0
-        # elaspsedTime = 0
-        # i = 0
-        # try:
-        #     while True:
+                if int(time.time()-startTime)>record_time:
+                    self.close_cameras()
+                    break
                 
-#                 startTime = time.time()
-#                 ret, frame = self.cam.read()
-                
-#                 timestr = time.strftime("%Y_%m_%d-%H%M%S")
-#                 dateForFileName = time.strftime("%Y_%m_%d")
-            
-#                 #  test if it's night
-#                 hour = timestr[-6:-4] # as string
-#                 if hour[0] == '0':
-#                     hour = int(hour[1])
-#                 else:
-#                     hour = int(hour)
-                
-#                 if time_A >= setTimeForA:
-                    
-#                     if ret:
-#                         try:
-#                             os.mkdir(f'{self.imageName}/{dateForFileName}/')
-#                         except:
-#                             pass
-#                         fileName = f'{self.imageName}/{dateForFileName}/{timestr} {i}.jpg'
-# #                         
-#                         imwrite(fileName, frame)
-#                     time_A = 0
-#                     if i < self.framerate-1:
-#                         i += 1
-#                     else:
-#                         i = 0
-                
-#                 elapsedTime = time.time() - startTime
-#                 time_A = time_A + elapsedTime
-#                 elaspsedTime = 0
         except Exception as e:
             self.log.printDebug(e, self.debug)
-            self.closeAllCameras()
-            
-    # def printDebug(self, msg: str, debug: bool):
-    #     if debug:
-    #         print(msg)
-    #         with open('./log/debug.txt', 'a') as f:
-    #             f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - {msg}')
-    #             f.write('\n')
-
+            self.close_cameras()
 
     def test_camera(self):
         # Loop to continuously fetch frames from the camera feed
@@ -127,12 +89,10 @@ class Camera:
             if waitKey(1) & 0xFF == 27:  # 27 is the ASCII code for the ESC key
                 break
         
-        self.close_all_cameras()
+        self.close_cameras()
 
 
-
-
-    def close_all_cameras(self):
+    def close_cameras(self):
         self.cam.release()
         destroyAllWindows()
 

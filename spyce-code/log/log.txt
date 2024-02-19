@@ -52,3 +52,19 @@
 2024-02-19 16:52:12 - Cannot read frame.
 2024-02-19 16:52:12 - Cannot read frame.
 2024-02-19 16:52:12 - Quiting after trying 8 frames.
+2024-02-19 23:06:19 - 'Camera' object has no attribute 'imageName'
+2024-02-19 23:07:24 - name 'i' is not defined
+2024-02-19 23:13:29 - name 'current_time' is not defined
+2024-02-19 23:18:34 - module 'posixpath' has no attribute 'exist'
+2024-02-19 23:18:46 - [Errno 2] No such file or directory: '/home/pepper/data-store/2024_02_19/23_18_46'
+2024-02-19 23:19:44 - module 'os' has no attribute 'mkdirs'
+2024-02-19 23:27:27 - 'Camera' object has no attribute 'closeAllCameras'
+2024-02-19 23:31:21 - name 'cv2' is not defined
+2024-02-19 23:35:00 - name 'image' is not defined
+2024-02-19 23:58:22 - 'Camera' object has no attribute 'close_all_cameras'
+2024-02-20 00:11:26 - Cannot read frame.
+2024-02-20 00:11:26 - Cannot read frame.
+2024-02-20 00:11:26 - Cannot read frame.
+2024-02-20 00:11:26 - Cannot read frame.
+2024-02-20 00:11:26 - Cannot read frame.
+2024-02-20 00:11:26 - Quiting after trying 3 frames.

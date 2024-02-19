@@ -1,15 +1,24 @@
 {
-    "paths": {
-      "output": "/home/pepper/data-store"
-    },
-    "camera":{
-        "fps":5,
-        "imageWidth":512, 
-        "imageHeight":512
+  "sensors":{
+    "camera"  : true,
+    "audio"   : false,
+    "humtemp" : false,
+    "weight"  : false
+  },
+
+  "settings":{
+    "debug": true,
+    "record_time": 5
     },
 
-    "settings":{
-        "debug": true
+  "paths": {
+    "output": "/home/pepper/data-store"
+    },
+    
+    "camera":{
+        "fps":3,
+        "imageWidth":512, 
+        "imageHeight":512
     }
 
   }

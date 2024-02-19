@@ -5,6 +5,9 @@ from multiprocessing import Process
 import os
 import getpass
 import json
+import signal
+from threading import Thread
+from time import sleep
 
 
 ''' Import our .py files '''
@@ -21,7 +24,7 @@ class Controller():
         self.spyceid = getpass.getuser()
         self.config_path = config_path
         self.config = self.__load_config__()
-    
+
 
         #initialize camera
         self.__initi_camera__()
@@ -37,16 +40,72 @@ class Controller():
                             debug=self.config['settings']['debug'])
 
 
-    def test_camera(self):
-        # proc_cameras = Process(target = self.myCameras.capture_images, args=())
+    def run_audiocam(self):
+        process_list = []
+
+        # Setup to handle SIGINT (Ctrl+C)
+        original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        record_time = self.config['settings']['record_time']
+        if self.config['sensors']['camera']:
+            proc_cameras = Process(target=self.myCameras.capture_images, args=(record_time,),name="ImageCaptureProcess")
+            process_list.append(proc_cameras)
         
-        # #start multiprocess
-        # proc_cameras.start()
+        if self.config['sensors']['audio']:
+            proc_audio = Process(target=self.myAudio.capture_audio, args=(),name="AudioCaptureProcess")  # Assuming capture_audio method
+            process_list.append(proc_audio)
 
-        # #wait till process finish
-        # proc_cameras.join()
+        try:
+            # Restore the original signal handler for graceful shutdown
+            signal.signal(signal.SIGINT, original_sigint_handler)
 
-        self.myCameras.test_camera()
+            for process in process_list:
+                process.start()
+
+            # Start monitoring thread
+            monitor_thread = Thread(target=self.monitor_processes, args=(process_list,))
+            monitor_thread.start()
+
+            for process in process_list:
+                process.join()
+            monitor_thread.join()  # Wait for the monitoring thread to finish
+        except KeyboardInterrupt:
+            print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Caught KeyboardInterrupt, terminating processes')
+            for process in process_list:
+                process.terminate()
+            self.close()
+        finally:
+            for process in process_list:
+                if process.is_alive():
+                    process.join()
+    
+
+
+    def close(self):
+        # Safely close camera, audio, and sensor
+        if self.config['sensors']['camera']:
+            self.myCameras.close_cameras()  
+        if self.config['sensors']['audio']:
+            self.myAudio.close_audio()  
+        if self.config['sensors']['humtemp']:
+            self.mySensor.close_sensor()  
+        print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Resources have been safely closed.')
+    
+    def monitor_processes(self, process_list):
+        try:
+            while True:
+                all_finished = True
+                for process in process_list:
+                    if process.is_alive():
+                        all_finished = False
+                        print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Process {process.name} running.')
+                    else:
+                        print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Process {process.name} has completed.')
+                if all_finished:
+                    print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} All processes have completed.')
+                    break
+                sleep(5)  # Wait for 1 second before checking again
+        except Exception as e:
+            print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Monitoring stopped due to an error: {e}')
     
     def __load_config__(self):
         with open(self.config_path, 'r') as config_file:
@@ -54,5 +113,5 @@ class Controller():
 
 
 if __name__ == "__main__":
-    cont = Controller()
-    cont.test_camera()
+    cont = Controller(config_path='./config/config.json')
+    cont.run_audiocam()
