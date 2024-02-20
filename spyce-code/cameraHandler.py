@@ -11,10 +11,11 @@ class Camera:
 
     def __init__(self, savepath, framerate=8, width=512, height=512, debug=True,device_index=0 , logpath='./log'):
         self.debug = debug
+        self.log = log('./spyce-code/log')
         self.framerate = framerate
         self.cam = VideoCapture(device_index)
         if not self.cam.isOpened():
-            self.printDebug('Camera did not initialise.', self.debug)
+            self.log.printDebug('Camera did not initialise.', self.debug)
             raise Exception('Camera did not initialise, restart.')
         self.cam.set(3, width)
         self.cam.set(4, height)
@@ -22,8 +23,6 @@ class Camera:
 
         if not(os.path.exists(logpath)):
             os.mkdir(logpath)
-        
-        self.log = log('./log')
 
         
     def capture_images(self, record_time=5):

@@ -49,6 +49,9 @@ class Controller():
                         samplerate=self.config['audio']['samplerate'], \
                         channel=self.config['audio']['channel'])
 
+    def run(self, trigger):
+        pass
+
 
     def run_audiocam(self):
         process_list = []
