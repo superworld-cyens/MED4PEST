@@ -68,3 +68,15 @@
 2024-02-20 00:11:26 - Cannot read frame.
 2024-02-20 00:11:26 - Cannot read frame.
 2024-02-20 00:11:26 - Quiting after trying 3 frames.
+2024-02-20 13:44:13 - Cannot read frame.
+2024-02-20 13:44:13 - Cannot read frame.
+2024-02-20 13:44:13 - Cannot read frame.
+2024-02-20 13:44:13 - Cannot read frame.
+2024-02-20 13:44:13 - Cannot read frame.
+2024-02-20 13:44:13 - Quiting after trying 3 frames.
+2024-02-20 13:49:48 - Cannot read frame.
+2024-02-20 13:49:48 - Cannot read frame.
+2024-02-20 13:49:48 - Cannot read frame.
+2024-02-20 13:49:48 - Cannot read frame.
+2024-02-20 13:49:48 - Cannot read frame.
+2024-02-20 13:49:48 - Quiting after trying 3 frames.

@@ -14,6 +14,7 @@ from time import sleep
 # from Sensor import Sensors
 # from AudioHandling import Audio
 from cameraHandler import Camera
+from audioHandler import Audio
 
 
 class Controller():
@@ -28,6 +29,9 @@ class Controller():
 
         #initialize camera
         self.__initi_camera__()
+
+        #initizlize audio
+        self.__initi_audio__()
     
     
 
@@ -38,6 +42,12 @@ class Controller():
                             width=self.config['camera']['imageWidth'], \
                             height=self.config['camera']['imageHeight'], \
                             debug=self.config['settings']['debug'])
+    
+    def __initi_audio__(self):
+        # initialize camera
+        self.myAudio = Audio(savepath=self.config['paths']['output'], \
+                        samplerate=self.config['audio']['samplerate'], \
+                        channel=self.config['audio']['channel'])
 
 
     def run_audiocam(self):
@@ -46,13 +56,15 @@ class Controller():
         # Setup to handle SIGINT (Ctrl+C)
         original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
         record_time = self.config['settings']['record_time']
+
+        if self.config['sensors']['audio']:
+            proc_audio = Process(target=self.myAudio.capture_audio, args=(record_time,),name="AudioCaptureProcess")  # Assuming capture_audio method
+            process_list.append(proc_audio)
+
         if self.config['sensors']['camera']:
             proc_cameras = Process(target=self.myCameras.capture_images, args=(record_time,),name="ImageCaptureProcess")
             process_list.append(proc_cameras)
-        
-        if self.config['sensors']['audio']:
-            proc_audio = Process(target=self.myAudio.capture_audio, args=(),name="AudioCaptureProcess")  # Assuming capture_audio method
-            process_list.append(proc_audio)
+    
 
         try:
             # Restore the original signal handler for graceful shutdown
@@ -67,6 +79,7 @@ class Controller():
 
             for process in process_list:
                 process.join()
+
             monitor_thread.join()  # Wait for the monitoring thread to finish
         except KeyboardInterrupt:
             print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Caught KeyboardInterrupt, terminating processes')
@@ -77,15 +90,14 @@ class Controller():
             for process in process_list:
                 if process.is_alive():
                     process.join()
-    
-
+            self.close()
 
     def close(self):
         # Safely close camera, audio, and sensor
         if self.config['sensors']['camera']:
             self.myCameras.close_cameras()  
-        if self.config['sensors']['audio']:
-            self.myAudio.close_audio()  
+        # if self.config['sensors']['audio']:
+        #     self.myAudio.close_audio()  
         if self.config['sensors']['humtemp']:
             self.mySensor.close_sensor()  
         print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Resources have been safely closed.')
@@ -101,7 +113,7 @@ class Controller():
                     else:
                         print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Process {process.name} has completed.')
                 if all_finished:
-                    print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} All processes have completed.')
+                    print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Run Audio-Camera processes has completed.')
                     break
                 sleep(5)  # Wait for 1 second before checking again
         except Exception as e:
@@ -114,4 +126,8 @@ class Controller():
 
 if __name__ == "__main__":
     cont = Controller(config_path='./config/config.json')
-    cont.run_audiocam()
+
+    for count in range(0,2):
+        cont.run_audiocam()
+        # print(count)
+        time.sleep(10)

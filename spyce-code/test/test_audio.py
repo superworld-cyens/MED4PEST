@@ -1,24 +1,28 @@
-import sounddevice as sd
-import numpy as np
-import scipy.io.wavfile as wav
+import sys
+import json
+from pathlib import Path
+import os
 
-def record_audio(duration=10, fs=48000, channels=1, device=None):
-    print("Recording...")
-    recording = sd.rec(int(duration * fs), samplerate=fs, channels=channels, device=device, dtype='float64')
-    sd.wait()  # Wait until recording is finished
-    print("Recording stopped")
-    return recording
+#set module path
+current_dir = Path(__file__).parent
+parent_dir = current_dir.parent
+sys.path.append(str(parent_dir))
 
-# Adjust these parameters as necessary
-duration = 10  # seconds
-fs = 192000  # sample rate
-channels = 1  # mono recording
-device_index = None  # None uses the default device, or use the index found with arecord -l
+from audioHandler import Audio
 
-# Record audio
-audio_data = record_audio(duration, fs, channels, device_index)
 
-# Save the recording
-output_filename = "recording.wav"
-wav.write(output_filename, fs, np.int16(audio_data / np.max(np.abs(audio_data)) * 32767))
-print(f"Audio saved to {output_filename}")
+def main(config_path):
+
+    with open(config_path, 'r') as config_file:
+            config = json.load(config_file)
+
+
+    myAudio = Audio(savepath=config['paths']['output'], \
+                            samplerate=config['audio']['samplerate'], \
+                            channel=config['audio']['channel'])
+    myAudio.test_audio()
+
+if __name__=="__main__":
+    # run the camera test
+    main(config_path='/home/pepper/MED4PEST/spyce-code/config/config.json')
+

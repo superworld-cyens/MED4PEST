@@ -1,7 +1,7 @@
 {
   "sensors":{
     "camera"  : true,
-    "audio"   : false,
+    "audio"   : true,
     "humtemp" : false,
     "weight"  : false
   },
@@ -19,6 +19,12 @@
         "fps":3,
         "imageWidth":512, 
         "imageHeight":512
+    },
+    
+    "audio":{
+        "samplerate":384000,
+        "channel":1
     }
+
 
   }

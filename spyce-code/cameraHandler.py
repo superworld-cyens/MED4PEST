@@ -9,10 +9,10 @@ from logHandler import log
 
 class Camera:
 
-    def __init__(self, savepath, framerate=8, width=512, height=512, debug=True, logpath='./log'):
+    def __init__(self, savepath, framerate=8, width=512, height=512, debug=True,device_index=0 , logpath='./log'):
         self.debug = debug
         self.framerate = framerate
-        self.cam = VideoCapture(0)
+        self.cam = VideoCapture(device_index)
         if not self.cam.isOpened():
             self.printDebug('Camera did not initialise.', self.debug)
             raise Exception('Camera did not initialise, restart.')
@@ -29,6 +29,7 @@ class Camera:
     def capture_images(self, record_time=5):
         try:
             missframecount = 0
+            t_zero = True
             startTime = time.time()
             while True:
                 ret, frame = self.cam.read()
@@ -40,7 +41,12 @@ class Camera:
                     timestr = datetime.now()
                     m_sec = round(timestr.microsecond / 1e6, 4)
                     dateForFileName = timestr.strftime("%Y_%m_%d")
-                    timeForFileName = timestr.strftime("%H_%M_%S")
+                    
+                    #iamges are recorded in one folder for each acquistion
+                    if t_zero==True:
+                        timeForFileName = timestr.strftime("%H_%M")
+                        t_zero = False
+                        
 
                     folderpath = f'{self.folderpath }/{dateForFileName}/{timeForFileName}/image'
                     if not(os.path.exists(folderpath)):
@@ -60,7 +66,7 @@ class Camera:
                         self.log.printDebug(e, self.debug)
                         self.close_cameras()
                         break
-                
+                # breaking after record time.
                 if int(time.time()-startTime)>record_time:
                     self.close_cameras()
                     break
