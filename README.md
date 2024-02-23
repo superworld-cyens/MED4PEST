@@ -97,7 +97,7 @@ To install the dependencies, follow the steps below:
 
 3. Install the virtual environment, create a Python virtual environment, and activate it:
 
-        sudo apt install python3-venv   # Install Python virtual environment package
+        sudo apt-get install python3-venv   # Install Python virtual environment package
         python -m venv .spy  # Create a virtual environment with any name
         source .spy/bin/activate  # Activate the virtual environment
 
