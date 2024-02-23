@@ -35,7 +35,26 @@ Step 2: Prepare the microSD Card.
     * Enter a password.
     * Enter the WiFi SSID and password (required for connecting to the Raspberry Pi in headless mode, i.e., via terminal).
 
-#### Connect to Raspberry Pi
+#### Update RPi Configuration
+
+- Edit Raspberry Pi COnfigurations.
+
+        sudo raspi-config
+  
+  In configuration, 
+    
+    - Advance Option > Expand Filesystem (Ensures that all of the SD card is available)
+    - Interface Option > Legacy Camera > Enable
+    - Interface Option > SSH > Enable
+    - Interface Option > VNC > Enable
+    - Interface Option > I2C > Enable
+    - Interface Option > Serial Port > Enable
+    - Interface Option > Remote GPIO > Enable
+
+- Reboot the Rapberry Pi
+
+
+#### Connecting to Raspberry Pi
 1. **With a Monitor**: This is the simplest method and is recommended for beginners. Connect a monitor, keyboard, and mouse to work with the Raspberry Pi as a desktop setup.
 2. **Using a Capture Card**.
 3. **Via SSH**: This is the most efficient way to work with the Raspberry Pi. You can access the device without connecting any extra peripherals.
@@ -44,18 +63,27 @@ Step 2: Prepare the microSD Card.
 
         ssh username@hostname.local
         ssh pepper@spyce.local # Example
+        ssh pepper@xx.x.xx.xx # Example
     
-    Note: SSH connection requires both machines to be on the same network. For remote access, consider using [remote.it](https://www.remote.it/getting-started/raspberry-pi).
+    Note: 
+    1. For SSH connections to work, both devices need to be on the same network, typically due to network firewalls or security configurations. For remote access, consider using [remote.it](https://www.remote.it/getting-started/raspberry-pi).
+    2. Consider using VSCode to connect to the raspberry pi (using SSH extension) [VSCode-SSH](https://code.visualstudio.com/docs/remote/ssh).
+
 
 #### Install Dependencies
-
 List of Dependencies:
-- Python 3.7+
-- OpenCV
-- NumPy
+- Adafruit-sht31d
+- Board
+- Numpy
 - PyAudio
+- OpenCV
+- Sounddevice
+- Soundfile
+- Simpleaudio
+- Scipy
 
 To install the dependencies, follow the steps below:
+
 
 1. Clone the repository:
 
@@ -76,7 +104,10 @@ To install the dependencies, follow the steps below:
 4. Install dependency packages:
 
         sudo apt-get install build-essential cmake git pkg-config libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libfontconfig1-dev libcairo2-dev
+
         sudo apt-get install libgtk2.0-dev pkg-config
+        
+        sudo apt-get install -y i2c-tools
 
     Note: Ensure that the above dependency packages are installed correctly without any errors.
 

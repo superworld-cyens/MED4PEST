@@ -6,7 +6,7 @@ import scipy.io.wavfile as wav
 from datetime import datetime
 import os
 import time
-import tempfile
+
 
 class Audio():
 
