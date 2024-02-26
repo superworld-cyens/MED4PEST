@@ -1,7 +1,7 @@
 {
   "sensors":{
     "camera"  : true,
-    "audio"   : true,
+    "audio"   : false,
     "humtemp" : false,
     "weight"  : false
   },
@@ -24,6 +24,15 @@
     "audio":{
         "samplerate":384000,
         "channel":1
+    },
+    
+    "pir":{
+        "gpioPin":13
+    },
+    
+    "usv":{
+        "Trigger":7,
+        "Echo":11
     }
 
 

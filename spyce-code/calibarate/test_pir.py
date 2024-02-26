@@ -1,31 +1,31 @@
-import RPi.GPIO as GPIO
-import time
+import sys
+import json
+from pathlib import Path
+import os
 
-# Use GPIO numbering
-GPIO.setmode(GPIO.BOARD)
+#set module path
+current_dir = Path(__file__).parent
+parent_dir = current_dir.parent
+sys.path.append(str(parent_dir))
 
-# Pin 7 is connected to the PIR sensor output
-pir_pin = 7
+from triggerHandler import PIR
 
-# Set pin 7 as an input pin with a pull-down resistor
-GPIO.setup(pir_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-print("PIR Module Test (CTRL+C to exit)")
+def main(config_path):
 
-try:
+    with open(config_path, 'r') as config_file:
+            config = json.load(config_file)
+
+
+    myPIR = PIR(savepath=config['paths']['output'],pir_pin=config['pir']['gpioPin'])
+
     while True:
-        # Read the state of the pin
-        print(GPIO.input(pir_pin))
-        if GPIO.input(pir_pin):
-            # Motion detected
-            logtime = time.strftime("%Y-%m-%d %H:%M:%S")
-            print(f'{logtime} - Motion detected!')
-            # Wait a bit to avoid flooding messages
-            time.sleep(1)
-        else:
-            # No motion detected
-            time.sleep(0.1)
-except KeyboardInterrupt:
-    print("Program terminated")
-finally:
-    GPIO.cleanup()
+        myPIR.test_pir()
+        logtime = time.strftime("%Y-%m-%d %H:%M:%S")
+        # time.sleep(.1)
+
+
+if __name__=="__main__":
+    # run the camera test
+    main(config_path='/home/pepper/MED4PEST/spyce-code/config/config.json')
+

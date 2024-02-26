@@ -11,8 +11,9 @@ class Camera:
 
     def __init__(self, savepath, framerate=8, width=512, height=512, debug=True,device_index=0 , logpath='./log'):
         self.debug = debug
-        self.log = log('./spyce-code/log')
+        self.log = log(logpath)
         self.framerate = framerate
+
         self.cam = VideoCapture(device_index)
         if not self.cam.isOpened():
             self.log.printDebug('Camera did not initialise.', self.debug)
@@ -99,7 +100,7 @@ class Camera:
 
     def close_cameras(self):
         self.cam.release()
-        destroyAllWindows()
+        # destroyAllWindows()
 
 
 if __name__=="__main__":

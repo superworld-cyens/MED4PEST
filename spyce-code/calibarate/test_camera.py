@@ -22,9 +22,11 @@ def main(config_path):
                             width=config['camera']['imageWidth'], \
                             height=config['camera']['imageHeight'], \
                             debug=config['settings']['debug'])
-    myCamera.test_camera()
+    # myCamera.test_camera()
+    myCamera.capture_images()
+    # myCamera.capture_images()
 
 if __name__=="__main__":
     # run the camera test
-    main(config_path='MED4PEST/spyce-code/config/config.json')
+    main(config_path='/home/pepper/MED4PEST/spyce-code/config/config.json')
 

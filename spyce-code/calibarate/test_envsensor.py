@@ -8,7 +8,7 @@ current_dir = Path(__file__).parent
 parent_dir = current_dir.parent
 sys.path.append(str(parent_dir))
 
-from sensorHandler import Sensor
+from sensorHandler import ENVSensor
 
 
 def main(config_path):
@@ -17,7 +17,7 @@ def main(config_path):
             config = json.load(config_file)
 
 
-    mySensor = Sensor(savepath=config['paths']['output'])
+    mySensor = ENVSensor(savepath=config['paths']['output'])
     mySensor.test_envipara()
 
 if __name__=="__main__":

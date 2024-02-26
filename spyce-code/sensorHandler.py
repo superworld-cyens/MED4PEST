@@ -4,8 +4,9 @@ import adafruit_sht31d
 import csv
 from datetime import datetime
 import os
+import RPi.GPIO as GPIO
 
-class Sensor():
+class ENVSensor():
 
     def __init__(self, savepath):
         self.folderpath = savepath
@@ -61,7 +62,6 @@ class Sensor():
         except KeyboardInterrupt:
             logtime = time.strftime("%Y-%m-%d %H:%M:%S")
             print(f'{logtime} Program stopped by user.') 
-
 
 if __name__=="__main__":
     rasp_sens = Sensor(savepath="/home/pepper/data-store/testdata")
