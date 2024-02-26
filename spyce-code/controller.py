@@ -15,6 +15,7 @@ from time import sleep
 # from AudioHandling import Audio
 from cameraHandler import Camera
 from audioHandler import Audio
+from triggerHandler import USS, PIR
 
 
 class Controller():
@@ -28,14 +29,17 @@ class Controller():
 
 
         #initialize camera
-        # self.__initi_camera__()
+        # self.__initi_camera__() #this is move inside the run method, the camera will be opened and close on go.
 
-        #initizlize audio
-        self.__initi_audio__()
-    
+        #initialize audio
+        self.__init_audio__()
+
+        #initialize
+        self.__init_pir()
+        self.__init_uss()
     
 
-    def __initi_camera__(self):
+    def __init_camera__(self):
         # initialize camera
         self.myCameras = Camera(savepath=self.config['paths']['output'], \
                             framerate=self.config['camera']['fps'], \
@@ -43,17 +47,23 @@ class Controller():
                             height=self.config['camera']['imageHeight'], \
                             debug=self.config['settings']['debug'])
     
-    def __initi_audio__(self):
+    def __init_audio__(self):
         # initialize camera
         self.myAudio = Audio(savepath=self.config['paths']['output'], \
                         samplerate=self.config['audio']['samplerate'], \
                         channel=self.config['audio']['channel'])
+    
+    def __initi_pir(self):
+        self.myPIR = PIR(savepath=self.config['paths']['output'], \
+                        pir_pin=self.config['pir']['Data'])
 
-    def run(self, trigger):
-        pass
+    def run_pir(self, writedata=True):
+        return self.myPIR.capture_pir(writedata)   
 
+    def run_uss(self, writedata=True):
+        return self.myUSV.capture_usv(writedata)
 
-    def run_audiocam(self):
+    def run_media(self):
         #init camera, reason to put it here is reinitialize after each epoch
         self.__initi_camera__()
         process_list = []
@@ -102,7 +112,7 @@ class Controller():
         if self.config['sensors']['camera']:
             self.myCameras.close_cameras() 
         if self.config['sensors']['audio']:
-            self.myAudio.close_audio()  
+            self.myAudio.close_audio()  # this is dummy close for future application
         if self.config['sensors']['humtemp']:
             self.mySensor.close_sensor()  
         print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Resources have been safely closed.')
@@ -133,6 +143,6 @@ if __name__ == "__main__":
     cont = Controller(config_path='./config/config.json')
 
     for count in range(0,2):
-        cont.run_audiocam()
+        cont.run_media()
         # print(count)
-        time.sleep(60)
+        time.sleep(5)

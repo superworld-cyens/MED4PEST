@@ -28,7 +28,7 @@ class ENVSensor():
             if not os.path.exists(folderpath):
                 os.makedirs(folderpath)
             
-            filename = os.path.join(folderpath, f"{dateForFileName}.csv")
+            filename = os.path.join(folderpath, f"{dateForFileName}_env.csv")
 
             # Check if file exists to write headers accordingly
             file_exists = os.path.isfile(filename)
@@ -64,5 +64,5 @@ class ENVSensor():
             print(f'{logtime} Program stopped by user.') 
 
 if __name__=="__main__":
-    rasp_sens = Sensor(savepath="/home/pepper/data-store/testdata")
+    rasp_sens = ENVSensor(savepath="/home/pepper/data-store/testdata")
     rasp_sens.capture_envipara()

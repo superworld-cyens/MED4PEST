@@ -104,5 +104,5 @@ class Camera:
 
 
 if __name__=="__main__":
-    rsp_cam = Camera("/home/pepper/data-store")
+    rsp_cam = Camera("/home/pepper/data-store/testdata")
     rsp_cam.captureImages()

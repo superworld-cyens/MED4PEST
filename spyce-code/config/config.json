@@ -1,7 +1,7 @@
 {
   "sensors":{
     "camera"  : true,
-    "audio"   : false,
+    "audio"   : true,
     "humtemp" : false,
     "weight"  : false
   },
@@ -12,7 +12,7 @@
     },
 
   "paths": {
-    "output": "/home/pepper/data-store"
+    "output": "/home/pepper/data-store/testdata"
     },
     
     "camera":{
@@ -21,13 +21,15 @@
         "imageHeight":512
     },
     
+  
     "audio":{
         "samplerate":384000,
-        "channel":1
+        "channel":1,
+        "comment": "Check if USB microphone is connected: arecord -l"
     },
     
     "pir":{
-        "gpioPin":13
+        "Data":13
     },
     
     "usv":{

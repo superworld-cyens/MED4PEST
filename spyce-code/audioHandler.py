@@ -14,7 +14,7 @@ class Audio():
     def __init__(self, savepath, samplerate=384000, channel=1, device_index=None ):
         self.folderpath = savepath 
         self.samplerate = samplerate
-        self.channel = channel
+        self.channel = channel #check if USB microphone is connected: arecord -l 
         self.device_index = device_index
 
     def capture_audio(self, record_time=5):
@@ -53,6 +53,9 @@ class Audio():
         logtime = time.strftime("%Y-%m-%d %H:%M:%S")
         sf.write(temppath+'/temp.wav', np.int16(recording / np.max(np.abs(recording)) * 32767), self.samplerate)
         print(f"{logtime} File saved, check temp folder")
+    
+    def close_audio(self):
+        pass
 
 if __name__=="__main__":
     rasp_aud = Audio(savepath="/home/pepper/data-store/testdata")
