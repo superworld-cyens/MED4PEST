@@ -35,6 +35,21 @@ Step 2: Prepare the microSD Card.
     * Enter a password.
     * Enter the WiFi SSID and password (required for connecting to the Raspberry Pi in headless mode, i.e., via terminal).
 
+#### Connecting to Raspberry Pi
+1. **With a Monitor**: This is the simplest method and is recommended for beginners. Connect a monitor, keyboard, and mouse to work with the Raspberry Pi as a desktop setup.
+2. **Using a Capture Card**.
+3. **Via SSH**: This is the most efficient way to work with the Raspberry Pi. You can access the device without connecting any extra peripherals.
+
+    Syntax:
+
+        ssh username@hostname.local
+        ssh pepper@spyce.local # Example
+        ssh pepper@xx.x.xx.xx # Example
+    
+    Note: 
+    1. For SSH connections to work, both devices need to be on the same network, typically due to network firewalls or security configurations. For remote access, consider using [remote.it](https://www.remote.it/getting-started/raspberry-pi).
+    2. Consider using VSCode to connect to the raspberry pi (using SSH extension) [VSCode-SSH](https://code.visualstudio.com/docs/remote/ssh).
+
 #### Update RPi Configuration
 
 - Edit Raspberry Pi COnfigurations.
@@ -53,21 +68,39 @@ Step 2: Prepare the microSD Card.
 
 - Reboot the Rapberry Pi
 
+#### Mounting Hardrive
+- Create a mount point :  Create a folder where you want to mount your HDD.
 
-#### Connecting to Raspberry Pi
-1. **With a Monitor**: This is the simplest method and is recommended for beginners. Connect a monitor, keyboard, and mouse to work with the Raspberry Pi as a desktop setup.
-2. **Using a Capture Card**.
-3. **Via SSH**: This is the most efficient way to work with the Raspberry Pi. You can access the device without connecting any extra peripherals.
+        sudo mkdir -p /path/to/create/new_folder
+        Ex: sudo mkdir -p /home/pepper/data-store
 
-    Syntax:
+    This will create a folder in the give path.
 
-        ssh username@hostname.local
-        ssh pepper@spyce.local # Example
-        ssh pepper@xx.x.xx.xx # Example
+- Identify the drive : Connect the HDD and run below command to the list block devices. 
+            
+        lsblk
+
+    Look for your device, usually named something like /dev/sda1 for the first partition on the first detected USB HDD.
+
+- Get UUID of HDD partition.
+
+        blkid
     
-    Note: 
-    1. For SSH connections to work, both devices need to be on the same network, typically due to network firewalls or security configurations. For remote access, consider using [remote.it](https://www.remote.it/getting-started/raspberry-pi).
-    2. Consider using VSCode to connect to the raspberry pi (using SSH extension) [VSCode-SSH](https://code.visualstudio.com/docs/remote/ssh).
+    Look for UUID of your device.
+
+- Auto-mounting using fstab.
+
+        sudo nano /etc/fstab
+
+- Add below line to fstab.
+
+        UUID=your-uuid-here /mnt/myhdd auto defaults,nofail 0 0
+
+        example: UUID=B696844C96840F55 /home/pepper/data-store auto defaults,nofail 0 0
+
+- Reboot RPi to mount or run sudo mount -a
+
+
 
 
 #### Install Dependencies

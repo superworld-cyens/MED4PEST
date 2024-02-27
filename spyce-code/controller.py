@@ -36,7 +36,7 @@ class Controller():
 
         #initialize
         self.__init_pir__()
-        # self.__init_uss__()
+        self.__init_uss__()
     
 
     def __init_camera__(self):
@@ -56,12 +56,19 @@ class Controller():
     def __init_pir__(self):
         self.myPIR = PIR(savepath=self.config['paths']['output'], \
                         pir_pin=self.config['pir']['Data'])
+    
+    def __init_uss__(self):
+        self.myUSS = USS(savepath=self.config['paths']['output'], \
+                        trig_pin=self.config['uss']['Trigger'], \
+                        echo_pin = self.config['uss']['Echo'])
+
+        USS(savepath="/home/pepper/data-store/testdata", trig_pin=7, echo_pin=11)
 
     def run_pir(self, writedata=True):
         return self.myPIR.capture_pir(writedata)   
 
     def run_uss(self, writedata=True):
-        return self.myUSV.capture_usv(writedata)
+        return self.myUSS.capture_usv(writedata)
 
     def run_media(self):
         #init camera, reason to put it here is reinitialize after each epoch
@@ -69,7 +76,7 @@ class Controller():
         process_list = []
 
         # Setup to handle SIGINT (Ctrl+C)
-        original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        # original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
         record_time = self.config['settings']['record_time']
 
         if self.config['sensors']['audio']:
@@ -83,7 +90,7 @@ class Controller():
 
         try:
             # Restore the original signal handler for graceful shutdown
-            signal.signal(signal.SIGINT, original_sigint_handler)
+            # signal.signal(signal.SIGINT, original_sigint_handler)
 
             for process in process_list:
                 process.start()

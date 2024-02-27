@@ -161,12 +161,12 @@ class USS():
 
 
 if __name__ == "__main__":
-    rasp_pir = PIR(pir_pin=13,savepath="/home/pepper/data-store/testdata")
-    while 1:
-        rasp_pir.capture_pir()
-        time.sleep(2)
-
-    # rasp_usv = USS(savepath="/home/pepper/data-store/testdata", trig_pin=7, echo_pin=11)
+    # rasp_pir = PIR(pir_pin=13,savepath="/home/pepper/data-store/testdata")
     # while 1:
-    #     print(rasp_usv.capture_usv())
+    #     rasp_pir.capture_pir()
+    #     time.sleep(2)
+
+    rasp_usv = USS(savepath="/home/pepper/data-store/testdata", trig_pin=7, echo_pin=11)
+    while 1:
+        print(rasp_usv.capture_usv())
     
