@@ -17,7 +17,7 @@ The device collects data on temperature, humidity, sound, low frame rate video, 
 * SHT30 Temperature and Humidity Sensor (Waterproof)
 * RadarIQ-M1 VISION Sensor (Additional)
 
-### Getting Started
+## Getting Started
 
 #### Install Raspberry Pi OS
 Step 1: Download the Raspberry Pi Imager.
@@ -89,6 +89,15 @@ To install the dependencies, follow the steps below:
 
         git clone https://github.com/superworld-cyens/MED4PEST.git
 
+        Folder structure:
+        /MED4PEST
+        ├── spyce-code
+        │ ├── calibarate
+        │ └── config
+        ├── spyce-resource
+        ├── spyce-setup
+        └── README.md
+
 2. Update and upgrade the Raspberry Pi:
 
         sudo apt-get update
@@ -109,15 +118,17 @@ To install the dependencies, follow the steps below:
         
         sudo apt-get install -y i2c-tools
 
+        sudo apt-get screen
+
     Note: Ensure that the above dependency packages are installed correctly without any errors.
 
 5. Install requirements:
 
-        pip install -r spyce-setup/requirements.txt
+        $pip install -r spyce-setup/requirements.txt
 
 6. ### You can run the below `setup_spyce.sh` script to automate the aforementioned steps:
 
-        chmod +x spyce-setup/setup.sh  # Make the file executable
+        $chmod +x spyce-setup/setup.sh  # Make the file executable
         ./spyce-setup/setup.sh  # Execute the script
 
 7. Verifying Test Dependencies Installation:
@@ -131,6 +142,48 @@ To install the dependencies, follow the steps below:
 8. Troubleshooting Installation Issues:
 
     For troubleshooting advice and common solutions to installation issues, please refer to the FAQ section at the end of this document.
+
+## How to run the code
+- Navigate to code folder
+    
+        $cd spyce-code
+
+- Update configuration setting on config.json
+    
+            "sensors":  {"camera"  : true,
+                        "audio"   : true,
+                        "humtemp" : false,
+                        "weight"  : false}
+
+            "settings": {"mode": 0,
+                        "debug": true,
+                        "record_time": 5,
+                        "comment": "Mode 0 for PIR trigger, 1 for USS trigger, 2 for Camera trigger",
+                        "output": "/home/pepper/data-store/testdata"}
+
+            "camera":   {"fps":3,
+                        "imageWidth":512, 
+                        "imageHeight":512}
+
+            "audio":    {"samplerate":384000,
+                        "channel":1,
+                        "comment": "Check if USB microphone is connected: arecord -l"
+                        },
+            
+            "pir":      {"Data":13}
+            
+            "usv":      {"Trigger":7,
+                        "Echo":11}
+- To run the code it is adviced to use terminal multiplexer. 
+
+    Note: Multiplexer allows users to start a screen session and then open any number of virtual terminals (or "windows") inside that session. Processes that run in Screen will continue to run when their window is not visible and even after the user disconnects.
+
+        $screen
+
+
+    Run the code
+
+        python main.py
 
 ## Frequently Asked Questions
 

@@ -35,8 +35,8 @@ class Controller():
         self.__init_audio__()
 
         #initialize
-        self.__init_pir()
-        self.__init_uss()
+        self.__init_pir__()
+        # self.__init_uss__()
     
 
     def __init_camera__(self):
@@ -53,7 +53,7 @@ class Controller():
                         samplerate=self.config['audio']['samplerate'], \
                         channel=self.config['audio']['channel'])
     
-    def __initi_pir(self):
+    def __init_pir__(self):
         self.myPIR = PIR(savepath=self.config['paths']['output'], \
                         pir_pin=self.config['pir']['Data'])
 
@@ -65,7 +65,7 @@ class Controller():
 
     def run_media(self):
         #init camera, reason to put it here is reinitialize after each epoch
-        self.__initi_camera__()
+        self.__init_camera__()
         process_list = []
 
         # Setup to handle SIGINT (Ctrl+C)
