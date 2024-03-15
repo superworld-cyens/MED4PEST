@@ -7,7 +7,7 @@
   },
 
   "settings":{
-    "mode": 1,
+    "mode": 0,
     "debug": true,
     "record_time": 5,
     "comment": "Mode 0 for PIR trigger, 1 for USS trigger, 2 for Camera trigger"

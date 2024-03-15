@@ -117,7 +117,7 @@ class USS():
     
     def test_usv(self):
         logtime = time.strftime("%Y-%m-%d %H:%M:%S")
-        print(f"{logtime} {self.capture_usv():.2f}cm")
+        print(f"{logtime} {self.get_distance():.2f}cm")
     
     def calibarate_uss(self):
         self.prev_distance = self.get_distance()

@@ -44,7 +44,7 @@ def main():
             print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} PIR initialized and waiting to detection motion.')
             motion_detected = controller.run_pir()
             if motion_detected:
-                # If motion is detected by PIR, run USS for 10 minutes or until motion is detected
+                # If motion is detected by PIR, run USS for X minutes or until motion is detected
                 print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Rodent entered pipe. USS initialized and waiting to detection motion.')
                 run_uss_with_timeout(controller)
             else:

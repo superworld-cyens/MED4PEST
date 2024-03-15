@@ -147,6 +147,10 @@ To install the dependencies, follow the steps below:
 
         sudo apt-get install build-essential cmake git pkg-config libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libfontconfig1-dev libcairo2-dev
 
+        sudo apt-get install libhdf5-dev libhdf5-103
+
+        sudo apt-get install libopenblas-dev
+
         sudo apt-get install libgtk2.0-dev pkg-config
         
         sudo apt-get install -y i2c-tools
@@ -157,7 +161,7 @@ To install the dependencies, follow the steps below:
 
 5. Install requirements:
 
-        $pip install -r spyce-setup/requirements.txt
+        pip install -r spyce-setup/requirements.txt
 
 6. ### You can run the below `setup_spyce.sh` script to automate the aforementioned steps:
 
@@ -233,6 +237,15 @@ To install the dependencies, follow the steps below:
 3. **OpenCV not installed**:
     - Error: OpenCV cannot be installed using Pip due to compatibility issues.
     - Solution: Install OpenCV from the source file.
+
+4. **While importing cv2, Numpy version error**
+    - Error: Please note and check the following:
+        * The Python version is: Python3.9 from "/usr/bin/  python"
+        * The NumPy version is: "1.26.4"
+        * from .cv2 import * ImportError: numpy.core.multiarray failed to import
+
+
+    - Solution: pip3 install --upgrade pip, pip3 install --force-reinstall numpy
 
 ## Acknowledgements
 

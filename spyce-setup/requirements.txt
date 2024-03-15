@@ -8,3 +8,4 @@ soundfile
 simpleaudio
 scipy
 adafruit-circuitpython-sht31d
+opencv-contrib-python==4.5.2.52

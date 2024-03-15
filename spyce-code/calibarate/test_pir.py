@@ -17,7 +17,7 @@ def main(config_path):
             config = json.load(config_file)
 
 
-    myPIR = PIR(savepath=config['paths']['output'],pir_pin=config['pir']['gpioPin'])
+    myPIR = PIR(savepath=config['paths']['output'],pir_pin=config['pir']['Data'])
 
     while True:
         myPIR.test_pir()
