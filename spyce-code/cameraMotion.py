@@ -50,13 +50,6 @@ class CamMotion:
                 break
         cv2.destroyAllWindows()
 
-    def capture_audio(self):
-        # Capture audio in a separate thread
-        # Placeholder: Replace with your actual audio capture logic
-        print(f"Audio capture started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        time.sleep(self.record_time)  # Simulate audio capture time
-        print(f"Audio capture ended at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-
     def run(self, audio_class):
         while True:
             ret, frame = self.cam.read()
