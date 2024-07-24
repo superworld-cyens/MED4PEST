@@ -94,7 +94,7 @@ class CamMotion:
                 if not os.path.exists(output_dir_folder):
                     os.makedirs(output_dir_folder)
 
-                cv2.imwrite(filename, fgmask)
+                cv2.imwrite(filename, frame)
                 self.log.printDebug(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} Motion detected! Initiated file capture and storage protocol. File {filename} saved successfully.", self.debug)
 
                 # Capture audio if not already initialized or if 60 seconds have passed since the last capture
