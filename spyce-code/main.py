@@ -1,6 +1,8 @@
 import threading
 from controller import Controller  # Assuming your Controller class is saved in a file named controller.py
 import time
+from utils import log, Configuration, force_stop_camera
+
 
 def run_uss_with_timeout(controller, timeout=300):  # 5 minutes timeout
     start_time = time.time()
@@ -33,8 +35,12 @@ def run_pir_and_uss_in_parallel(controller):
     controller.run_pir()  
     uss_thread.join()
 
+def run_camera_mode(controller):
+    #background change capture
+    controller.run_camera()
+
 def main():
-    controller = Controller()  # Initialize your controller
+    controller = Controller('/home/pepper/MED4PEST/spyce-code/config/config.json')  # Initialize your controller
     configuration = controller.config
 
     print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} User choose MODE {configuration["settings"]["mode"]}')
@@ -49,9 +55,15 @@ def main():
                 run_uss_with_timeout(controller)
             else:
                 print(f'{time.strftime("%Y-%m-%d %H:%M:%S")} Waiting for Rodents.')
+
         elif configuration["settings"]["mode"]==1:
             # Both run_pir() and run_uss() should run independently and in parallel
             run_pir_and_uss_in_parallel(controller)
+
+        elif configuration["settings"]["mode"]==2:
+            #only camera will work.
+            run_camera_mode(controller)
+
         else:
             print("Select correct mode!!!!")
     except Exception as e:
@@ -62,7 +74,9 @@ def main():
         # controller.close()  
         pass
 
-if __name__ == "__main__":  
+if __name__ == "__main__": 
+    print('main')
 
     while 1:
+        # print(1)
         main()
