@@ -16,7 +16,8 @@ from time import sleep
 from cameraHandler import Camera
 from audioHandler import Audio
 from triggerHandler import USS, PIR
-
+from cameraMotion import CamMotion
+from utils import force_stop_camera
 
 class Controller():
 
@@ -31,12 +32,16 @@ class Controller():
         #initialize camera
         # self.__initi_camera__() #this is move inside the run method, the camera will be opened and close on go.
 
+        #initialize cameramotion camera class
+        self.__init__cammotion()
+        
         #initialize audio
         self.__init_audio__()
 
-        #initialize
-        self.__init_pir__()
-        self.__init_uss__()
+        if self.config["settings"]["mode"]!=2:
+            #initialize
+            self.__init_pir__()
+            self.__init_uss__()
     
 
     def __init_camera__(self):
@@ -46,6 +51,14 @@ class Controller():
                             width=self.config['camera']['imageWidth'], \
                             height=self.config['camera']['imageHeight'], \
                             debug=self.config['settings']['debug'])
+    def __init__cammotion(self):
+        force_stop_camera()
+        self.myCameraMotion = CamMotion(savepath=self.config['paths']['output'], \
+                            framerate=self.config['camera']['fps'], \
+                            width=self.config['camera']['imageWidth'], \
+                            height=self.config['camera']['imageHeight'], \
+                            debug=self.config['settings']['debug'])
+
     
     def __init_audio__(self):
         # initialize camera
@@ -62,13 +75,19 @@ class Controller():
                         trig_pin=self.config['uss']['Trigger'], \
                         echo_pin = self.config['uss']['Echo'])
 
-        USS(savepath="/home/pepper/data-store/testdata", trig_pin=7, echo_pin=11)
+        # USS(savepath="/home/pepper/data-store/testdata", trig_pin=7, echo_pin=11)
 
     def run_pir(self, writedata=True):
         return self.myPIR.capture_pir(writedata)   
 
     def run_uss(self, writedata=True):
         return self.myUSS.capture_usv(writedata)
+    
+    def run_camera(self):
+        print('Run cammotion')
+        
+        self.myCameraMotion.run(self.myAudio)
+        
 
     def run_media(self):
         #init camera, reason to put it here is reinitialize after each epoch
@@ -147,7 +166,8 @@ class Controller():
 
 
 if __name__ == "__main__":
-    cont = Controller(config_path='./config/config.json')
+    # cont = Controller(config_path='./config/config.json')
+    cont = Controller(config_path='/home/pepper/MED4PEST/spyce-code/config/config.json')
 
     for count in range(0,2):
         cont.run_media()
